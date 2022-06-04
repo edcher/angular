@@ -16,9 +16,19 @@ class postiTeatro {
 })
 export class AppComponent  {
   title: string = 'Prenotazioni spettacoli';
+  selezione: postiTeatro;
   posti: Array<postiTeatro> = [
     new postiTeatro('Torino','14'),
     new postiTeatro('Milano','15'),
     new postiTeatro('Genova','18')
   ];
+  seleziona(itemName: string) {
+    var trovato: Array<postiTeatro> = this.posti.filter(
+      el => ( el.nome === itemName )
+    );
+	  this.selezione = trovato[0];
+  }
+  clean() {
+    this.selezione=undefined;
+  }
 }
