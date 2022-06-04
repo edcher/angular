@@ -1,4 +1,7 @@
-<hello name="{{ name }}"></hello>
-<p>
-  Start editing to see some magic happen :)
-</p>
+<h3> {{ title }} </h3>
+
+<ul>
+<li *ngFor='let city of posti' >
+  <b>{{city.nome}}</b> - {{city.valore}}
+</li>
+</ul>
