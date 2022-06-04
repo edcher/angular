@@ -1,4 +1,9 @@
-<p *ngIf = "selezione !== undefined">
-  La temperatura a {{selezione.nome}} e' di {{selezione.valore}} gradi
-  <button (click) = 'clean()'>Chiudi</button>
+<!-- Nuovo teatro -->
+
+<app-createatro (newTeatroEvent)="addTeatro($event)"></app-createatro>
+
+<br><br>
+<p> 
+  Inserisci la chiave
+<input type="text" placeholder="..." #cerca (keyup.enter)="refreshTeatro(cerca.value); cerca.value=''; mostra='';">
 </p>
