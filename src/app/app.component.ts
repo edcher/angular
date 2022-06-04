@@ -1,6 +1,7 @@
 import { Component, VERSION } from '@angular/core';
+import { PrenotazioneService } from './prenotazione.service';
 
-class postiTeatro {
+export class postiTeatro {
   nome: string;
   valore: string; 
   constructor(nome: string, valore: string) {
@@ -17,18 +18,14 @@ class postiTeatro {
 export class AppComponent  {
   title: string = 'Prenotazioni spettacoli';
   selezione: postiTeatro;
-  posti: Array<postiTeatro> = [
-    new postiTeatro('Torino','14'),
-    new postiTeatro('Milano','15'),
-    new postiTeatro('Genova','18')
-  ];
-  seleziona(itemName: string) {
-    var trovato: Array<postiTeatro> = this.posti.filter(
-      el => ( el.nome === itemName )
-    );
-	  this.selezione = trovato[0];
-  }
-  clean() {
-    this.selezione=undefined;
+  posti: Array<string> = ['Torino','Milano','Genova'];
+  constructor(private ows: PrenotazioneService) { }
+  refreshTemperature(itemName: string) {
+    this.selezione = new postiTeatro(itemName, undefined);
+    this.ows.getData(this.selezione.nome).subscribe({
+      next: ( x: any ) => this.selezione.valore = x.main.temp,
+      error: err => console.error('Observer got an error: ' + err)
+    });
+
   }
 }
